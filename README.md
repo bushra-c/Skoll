@@ -3,8 +3,23 @@ String webpage = R"rawliteral(
 <html>
  <head>
    <title>Sensor Data</title>
+   <style>
+     /* Banner style */
+     .banner {
+       background-color: #4CAF50; 
+       color: white; 
+       text-align: center; 
+       padding: 10px; 
+       font-size: 24px;
+     }
+   </style>
  </head>
  <body style="background-color: #F5F5DC;">
+   <!-- Banner -->
+   <div class="banner">
+     Welcome to the Real-Time Sensor Data Dashboard
+   </div>
+   
    <h1>Real-Time Sensor Data</h1>
    <p><strong>Download sensor data as a CSV file:</strong></p>
    <a href="/download" download="sensor_data.csv">
