@@ -3,7 +3,7 @@
  <head>
    <title>Sensor Data</title>
  </head>
- <body style="background-color: YellowGreen;">
+ <body style="background-color: Beige ;">
    <h1>Real-Time Sensor Data</h1>
    <p><strong>Download sensor data as a CSV file:</strong></p>
    <a href="/download" download="sensor_data.csv">
