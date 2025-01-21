@@ -17,7 +17,7 @@ String webpage = R"rawliteral(
  <body style="background-color: #F5F5DC;">
    <!-- Banner -->
    <div class="banner">
-     Welcome to the Real-Time Sensor Data Dashboard
+     Plant Sensor Data Dashboard
    </div>
    
    <h1>Real-Time Sensor Data</h1>
