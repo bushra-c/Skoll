@@ -1,4 +1,3 @@
-String webpage = R"rawliteral(
 <!DOCTYPE html>
 <html>
  <head>
