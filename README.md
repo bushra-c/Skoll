@@ -1,23 +1,36 @@
-
+String webpage = R"rawliteral(
 <!DOCTYPE html>
 <html>
  <head>
    <title>Sensor Data</title>
    <style>
      /* Banner style */
-     .banner {
-       background-color: #4CAF50; 
-       color: white; 
-       text-align: center; 
-       padding: 10px; 
-       font-size: 24px;
+     .navbar {
+       overflow: hidden;
+       background-color: #333;
+     }
+     
+     .navbar a {
+       float: left;
+       display: block;
+       color: white;
+       text-align: center;
+       padding: 14px 20px;
+       text-decoration: none;
+     }
+     
+     .navbar a:hover {
+       background-color: #ddd;
+       color: black;
      }
    </style>
  </head>
  <body style="background-color: #F5F5DC;">
-   <!-- Banner -->
-   <div class="banner">
-     Plant Sensor Data Dashboard
+   <!-- Navigation Banner -->
+   <div class="navbar">
+     <a href="/home">Home</a>
+     <a href="/about">About</a>
+     <a href="/contact">Contact Us</a>
    </div>
    
    <h1>Real-Time Sensor Data</h1>
@@ -34,8 +47,5 @@
  </body>
 </html>
 )rawliteral";
-
-
-
 
 
