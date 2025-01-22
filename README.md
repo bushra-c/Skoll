@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
  <head>
-   <title>Sensor Data</title>
+   <title>Home</title> <!-- Changed the title to "Home" -->
    <style>
      /* Banner style */
      .navbar {
@@ -26,21 +27,9 @@
  <body style="background-color: #F5F5DC;">
    <!-- Navigation Banner -->
    <div class="navbar">
-     <a href="home/">Home</a>
+     <!-- Changed the Home link to point to the new URL -->
+     <a href="https://bushra-c.github.io/Skoll/">Home</a>
      <a href="/about">About</a>
      <a href="/contact">Contact Us</a>
    </div>
-   
-   <h1>Real-Time Sensor Data</h1>
-   <p><strong>Download sensor data as a CSV file:</strong></p>
-   <a href="/download" download="sensor_data.csv">
-     <button type="button">Download CSV</button>
-   </a>
-   <p>The CSV contains:</p>
-   <ul>
-     <li>Air Temperature (C)</li>
-     <li>Air Humidity (% RH)</li>
-     <li>Soil Moisture (%)</li>
-   </ul>
- </body>
-</html>
+  
