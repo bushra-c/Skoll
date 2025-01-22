@@ -47,5 +47,3 @@ String webpage = R"rawliteral(
  </body>
 </html>
 )rawliteral";
-
-
