@@ -1,4 +1,3 @@
-String webpage = R"rawliteral(
 <!DOCTYPE html>
 <html>
  <head>
@@ -46,4 +45,3 @@ String webpage = R"rawliteral(
    </ul>
  </body>
 </html>
-)rawliteral";
