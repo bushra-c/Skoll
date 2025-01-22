@@ -26,7 +26,7 @@
  <body style="background-color: #F5F5DC;">
    <!-- Navigation Banner -->
    <div class="navbar">
-     <a href="https://bushra-c.github.io/Skoll/">Home</a>
+     <a href="home/">Home</a>
      <a href="/about">About</a>
      <a href="/contact">Contact Us</a>
    </div>
