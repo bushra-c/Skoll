@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
  <head>
    <title>Home</title> <!-- Changed the title to "Home" -->
