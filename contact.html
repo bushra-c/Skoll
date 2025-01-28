@@ -1,27 +1,221 @@
-<div class="container">
-    <h1>Contact Us</h1>
-    <p>We're here to help! Whether you have queries, need technical support, or just want to learn more about our services, feel free to reach out.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Skoll</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+            color: white;
+            background: linear-gradient(-45deg, #004d00, #009900, #b3ff99);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+        }
 
-    <div class="contact-info">
-        <p><strong>📞 Customer Service:</strong> +44 1234 567 890</p>
-        <p><strong>📧 Email:</strong> support@skolltech.com</p>
-        <p><strong>📍 Address:</strong></p>
-        <p>
-            Skoll Technologies Ltd.<br>
-            123 Innovation Street<br>
-            London, UK<br>
-            AB1 2CD
-        </p>
+        /* Gradient Animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Contact Section */
+        .container {
+            width: 60%;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 120px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: #b3ff99;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 80%;
+            margin: auto;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        .contact-form input::placeholder, 
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .contact-form input:focus, 
+        .contact-form textarea:focus {
+            outline: none;
+            border: 1px solid #b3ff99;
+        }
+
+        /* Submit Button */
+        .contact-form button {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 14px;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="data.html">Live Data</a>
+        <a href="contact.html">Contact</a>
     </div>
 
-    <!-- Contact Form -->
-    <div class="contact-form">
-        <h2>Send Us a Message</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>We're here to help! Whether you have questions, need technical support, or just want to learn more about our services, feel free to reach out.</p>
+
+        <div class="contact-info">
+            <p><strong>📞 Customer Service:</strong> +44 1234 567 890</p>
+            <p><strong>📧 Email:</strong> support@skolltech.com</p>
+            <p><strong>📍 Address:</strong></p>
+            <p>
+                Skoll Technologies Ltd.<br>
+                123 Innovation Street<br>
+                London, UK<br>
+                AB1 2CD
+            </p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
-</div>
+
+    <div class="footer">
+        &copy; 2025 Skoll Technologies Ltd. All Rights Reserved.
+    </div>
+
+    <script>
+        /* Scroll Animation */
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeElements = document.querySelectorAll(".fade-in");
+            
+            function checkVisibility() {
+                fadeElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 50) {
+                        el.classList.add("visible");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", checkVisibility);
+            checkVisibility();
+        });
+    </script>
+
+</body>
+</html>
