@@ -28,7 +28,7 @@
    <div class="navbar">
      <!-- Changed the Home link to point to the new URL -->
      <a href="https://bushra-c.github.io/Skoll/">Home</a>
-     <a href="/about">About</a>
+     <a href="about.html">About</a>
      <a href="/contact">Contact Us</a>
    </div>
    
