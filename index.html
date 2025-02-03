@@ -4,301 +4,347 @@
 
 <head> 
 
-    <meta charset="UTF-8"> 
+<meta charset="UTF-8"> 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <title>Skoll | Smart Plant Pot</title> 
+<title>Skoll | Live Data</title> 
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"> 
 
-    <style> 
+<style> 
 
-        body { 
+body { 
 
-            font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif; 
 
-            margin: 0; 
+    margin: 0; 
 
-            padding: 0; 
+    padding: 0; 
 
-            text-align: center; 
+    text-align: center; 
 
-            overflow-x: hidden; 
+    overflow-x: hidden; 
 
-            color: white; 
+    color: white; 
 
-            background: linear-gradient(-45deg, #004d00, #009900, #b3ff99); 
+    background: linear-gradient(-45deg, #004d00, #009900, #b3ff99); 
 
-            background-size: 400% 400%; 
+    background-size: 400% 400%; 
 
-            animation: gradientShift 10s ease infinite; 
+    animation: gradientShift 10s ease infinite; 
 
-        } 
-
- 
-
-        @keyframes gradientShift { 
-
-            0% { background-position: 0% 50%; } 
-
-            50% { background-position: 100% 50%; } 
-
-            100% { background-position: 0% 50%; } 
-
-        } 
+} 
 
  
 
-        .navbar { 
+/* Animated Gradient */ 
 
-            background: rgba(0, 0, 0, 0.8); 
+@keyframes gradientShift { 
 
-            padding: 15px 0; 
+    0% { background-position: 0% 50%; } 
 
-            position: fixed; 
+    50% { background-position: 100% 50%; } 
 
-            width: 100%; 
+    100% { background-position: 0% 50%; } 
 
-            top: 0; 
-
-            z-index: 1000; 
-
-        } 
-
-        .navbar a { 
-
-            color: white; 
-
-            text-decoration: none; 
-
-            padding: 15px 25px; 
-
-            font-size: 18px; 
-
-            transition: 0.3s; 
-
-            font-weight: bold; 
-
-        } 
-
-        .navbar a:hover { 
-
-            background-color: rgba(255, 255, 255, 0.2); 
-
-            border-radius: 5px; 
-
-        } 
+} 
 
  
 
-        .hero { 
+/* Navbar */ 
 
-            text-align: center; 
+.navbar { 
 
-            padding: 120px 20px; 
+    background: rgba(0, 0, 0, 0.8); 
 
-            animation: fadeIn 1s ease-in-out; 
+    padding: 15px 0; 
 
-        } 
+    position: fixed; 
 
-        .hero h1 { 
+    width: 100%; 
 
-            font-size: 50px; 
+    top: 0; 
 
-            font-weight: 600; 
+    z-index: 1000; 
 
-            color: #b3ff99; 
+    display: flex; 
 
-        } 
+    justify-content: center; 
 
-        .hero p { 
+} 
 
-            font-size: 20px; 
+.navbar a { 
 
-            max-width: 600px; 
+    color: white; 
 
-            margin: 10px auto; 
+    text-decoration: none; 
 
-            line-height: 1.6; 
+    padding: 15px 25px; 
 
-        } 
+    font-size: 18px; 
 
- 
+    transition: 0.3s; 
 
-        .plant-image { 
+    font-weight: bold; 
 
-            width: 60%; 
+} 
 
-            max-width: 500px; 
+.navbar a:hover { 
 
-            border-radius: 20px; 
+    background-color: rgba(255, 255, 255, 0.2); 
 
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
+    border-radius: 5px; 
 
-            margin-top: 20px; 
-
-            transition: transform 0.3s ease-in-out; 
-
-        } 
-
-        .plant-image:hover { 
-
-            transform: scale(1.05); 
-
-        } 
+} 
 
  
 
-        .cta-button { 
+/* Section Styling */ 
 
-            display: inline-block; 
+section { 
 
-            background: rgba(255, 255, 255, 0.2); 
+    width: 80%; 
 
-            backdrop-filter: blur(10px); 
+    margin: auto; 
 
-            color: white; 
+    padding: 50px 0; 
 
-            padding: 15px 25px; 
-
-            font-size: 18px; 
-
-            text-decoration: none; 
-
-            border-radius: 8px; 
-
-            margin-top: 30px; 
-
-            transition: 0.3s ease-in-out; 
-
-        } 
-
-        .cta-button:hover { 
-
-            background-color: rgba(255, 255, 255, 0.3); 
-
-            transform: scale(1.05); 
-
-        } 
-
-        .cta-button[href="#data"] { 
-
-            scroll-behavior: smooth; 
-
-        } 
+} 
 
  
 
-        .data-section { 
+/* Home Section */ 
 
-            padding: 50px 20px; 
+#home { 
 
-            background: rgba(0, 0, 0, 0.8); 
+    background: rgba(0, 0, 0, 0.7); 
 
-            margin-top: 50px; 
+    padding: 30px; 
 
-        } 
+    border-radius: 15px; 
 
-        .about-section { 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
 
-            padding: 50px 20px; 
+} 
 
-            background: rgba(0, 0, 0, 0.6); 
+h1 { 
 
-            margin-top: 50px; 
+    font-size: 36px; 
 
-        } 
+    font-weight: 600; 
 
- 
+    color: #b3ff99; 
 
-        .footer { 
-
-            text-align: center; 
-
-            margin-top: 40px; 
-
-            padding: 20px; 
-
-            font-size: 14px; 
-
-            color: white; 
-
-            background: rgba(0, 0, 0, 0.8); 
-
-        } 
+} 
 
  
 
-        @keyframes fadeIn { 
+/* Data Section */ 
 
-            from { opacity: 0; transform: translateY(20px); } 
+#data { 
 
-            to { opacity: 1; transform: translateY(0); } 
+    background: rgba(0, 0, 0, 0.7); 
 
-        } 
+    padding: 30px; 
 
-    </style> 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
+
+    border-radius: 15px; 
+
+    margin-top: 60px; 
+
+} 
+
+.live-data-container { 
+
+    display: flex; 
+
+    flex-wrap: wrap; 
+
+    justify-content: center; 
+
+    gap: 20px; 
+
+    margin-top: 30px; 
+
+} 
+
+.live-data-card { 
+
+    background: rgba(255, 255, 255, 0.15); 
+
+    backdrop-filter: blur(10px); 
+
+    padding: 20px; 
+
+    border-radius: 15px; 
+
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); 
+
+    font-size: 18px; 
+
+    font-weight: bold; 
+
+    width: 220px; 
+
+    transition: transform 0.3s ease-in-out; 
+
+    text-align: center; 
+
+} 
+
+.live-data-card:hover { 
+
+    transform: scale(1.05); 
+
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); 
+
+} 
+
+ 
+
+/* About Section */ 
+
+#about { 
+
+    background: rgba(0, 0, 0, 0.7); 
+
+    padding: 30px; 
+
+    border-radius: 15px; 
+
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); 
+
+    margin-top: 60px; 
+
+} 
+
+ 
+
+/* Footer */ 
+
+.footer { 
+
+    text-align: center; 
+
+    margin-top: 40px; 
+
+    padding: 20px; 
+
+    font-size: 14px; 
+
+    color: white; 
+
+    background: rgba(0, 0, 0, 0.8); 
+
+} 
+
+ 
+
+/* Scroll Animation */ 
+
+html { 
+
+    scroll-behavior: smooth; 
+
+} 
+
+ 
+
+</style> 
 
 </head> 
 
 <body> 
 
-    <div class="navbar"> 
+ 
 
-        <a href="#home">Home</a> 
+<!-- Navigation Menu --> 
 
-        <a href="#data">Live Data</a> 
+<div class="navbar"> 
 
-        <a href="#about">About</a> 
+    <a href="#home">Home</a> 
 
-    </div> 
+    <a href="#data">Live Data</a> 
+
+    <a href="#about">About</a> 
+
+</div> 
 
  
 
-    <div id="home" class="hero"> 
+<!-- Home Section --> 
 
-        <h1>Smart Care for Your Plants</h1> 
+<section id="home"> 
 
-        <p>Skoll is the self-adjusting plant pot that follows the light and monitors its environment, so your plants thrive effortlessly.</p> 
+    <h1>Welcome to Skoll</h1> 
 
-        <img src="plant-image.jpg" class="plant-image" alt="Smart Plant Pot"> 
+    <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p> 
 
-        <br> 
-
-        <a href="#data" class="cta-button">View Live Data</a> 
-
-    </div> 
+</section> 
 
  
 
-    <div id="data" class="data-section"> 
+<!-- Data Section --> 
 
-        <h2>Live Sensor Data</h2> 
+<section id="data"> 
 
-        <p>Real-time environmental readings from the smart plant pot.</p> 
+    <h1>Live Sensor Data</h1> 
 
-        <div id="sensor-data">Loading data...</div> 
+    <p>Monitor real-time environmental data from your Skoll plant pot.</p> 
+
+    <div class="live-data-container"> 
+
+        <div class="live-data-card">🌡️ Air Temperature: <br> <span id="temperature">24°C</span></div> 
+
+        <div class="live-data-card">💧 Humidity: <br> <span id="humidity">60%</span></div> 
+
+        <div class="live-data-card">🌱 Soil Moisture: <br> <span id="soil">45%</span></div> 
+
+        <div class="live-data-card">☀️ Light Intensity: <br> <span id="light">High</span></div> 
 
     </div> 
+
+    <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a> 
+
+</section> 
 
  
 
-    <div id="about" class="about-section"> 
+<!-- About Section --> 
 
-        <h2>About Skoll</h2> 
+<section id="about"> 
 
-        <p>Skoll is an innovative smart plant pot designed to ensure your plants receive optimal care by monitoring soil moisture, temperature, and humidity levels.</p> 
+    <h1>About Skoll</h1> 
 
-    </div> 
+    <p>Skoll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p> 
+
+    <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p> 
+
+    <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p> 
+
+</section> 
 
  
 
-    <div class="footer"> 
+<!-- Footer --> 
 
-        &copy; 2025 Skoll Technologies Ltd. All Rights Reserved. 
+<div class="footer"> 
 
-    </div> 
+    &copy; 2025 Skoll Technologies Ltd. All Rights Reserved. 
+
+</div> 
+
+ 
+
+<script> 
+
+// Optional: Add any JavaScript functionality as needed for dynamic features. 
+
+</script> 
+
+ 
 
 </body> 
 
