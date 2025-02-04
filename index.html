@@ -194,10 +194,10 @@
                 const rows = text.trim().split("\n");
                 const lastRow = rows[rows.length - 1].split(",");
 
-                document.getElementById("temperature").innerText = lastRow[2] + "°C";
-                document.getElementById("humidity").innerText = lastRow[3] + "%";
-                document.getElementById("soil").innerText = lastRow[4] + "%";
-                document.getElementById("light").innerText = lastRow[5] + " Lumens";
+                document.getElementById("temperature").innerText = lastRow[1] + "°C";
+                document.getElementById("humidity").innerText = lastRow[2] + "%";
+                document.getElementById("soil").innerText = lastRow[3] + "%";
+                document.getElementById("light").innerText = lastRow[4] + " Lumens";
 
                 updateGraph(tempChart, lastRow[1], lastRow[2]);
                 updateGraph(humidityChart, lastRow[1], lastRow[3]);
