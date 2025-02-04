@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skoll | Live Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
 
     <style>
         body {
@@ -12,7 +13,6 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            overflow-x: hidden;
             color: white;
             background: linear-gradient(-45deg, #004d00, #009900, #b3ff99);
             background-size: 400% 400%;
@@ -53,11 +53,10 @@
             margin: auto;
             padding: 50px 0;
         }
-        #home, #data, #about {
+        #home, #data {
             background: rgba(0, 0, 0, 0.7);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
             margin-top: 60px;
         }
         h1 {
@@ -78,7 +77,6 @@
             backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
             font-size: 18px;
             font-weight: bold;
             width: 220px;
@@ -87,49 +85,12 @@
         }
         .live-data-card:hover {
             transform: scale(1.05);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Download Button - has been styled */
-        .download-button {
-            display: inline-block;
-            padding:
-
-```html
-            12px 25px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-top: 20px;
-            display: block;
-            width: 250px;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .download-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
-            box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.5);
-            border: 2px solid rgba(0, 255, 100, 0.8);
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
-            50% { box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.6); }
-            100% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
-        }
-
-        .download-button {
-            animation: glow 2s infinite alternate;
+        canvas {
+            max-width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
 
         .footer {
@@ -144,40 +105,43 @@
 </head>
 <body>
 
-<!-- Navigation Menu -->
+<!-- Navigation -->
 <div class="navbar">
     <a href="#home">Home</a>
     <a href="#data">Live Data</a>
-    <a href="#about">About</a>
 </div>
 
 <!-- Home Section -->
 <section id="home">
     <h1>Welcome to Skoll</h1>
-    <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p>
+    <p>Monitor real-time environmental data from your smart plant pot.</p>
 </section>
 
 <!-- Data Section -->
 <section id="data">
     <h1>Live Sensor Data</h1>
-    <p>Monitor real-time environmental data from your Skoll plant pot.</p>
 
     <div class="live-data-container">
-        <div class="live-data-card">🌡️ Air Temperature: <br> <span id="temperature">24°C</span></div>
-        <div class="live-data-card">💧 Humidity: <br> <span id="humidity">60%</span></div>
-        <div class="live-data-card">🌱 Soil Moisture: <br> <span id="soil">45%</span></div>
-        <div class="live-data-card">☀️ Light Intensity: <br> <span id="light">High</span></div>
+        <div class="live-data-card">
+            🌡️ Temperature: <br> <span id="temperature">--</span>°C
+            <canvas id="temperatureChart"></canvas>
+        </div>
+
+        <div class="live-data-card">
+            💧 Humidity: <br> <span id="humidity">--</span>%
+            <canvas id="humidityChart"></canvas>
+        </div>
+
+        <div class="live-data-card">
+            🌱 Soil Moisture: <br> <span id="soil">--</span>%
+            <canvas id="soilChart"></canvas>
+        </div>
+
+        <div class="live-data-card">
+            ☀️ Light: <br> <span id="light">--</span>
+            <canvas id="lightChart"></canvas>
+        </div>
     </div>
-
-    <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a>
-</section>
-
-<!-- About Section -->
-<section id="about">
-    <h1>About Skoll</h1>
-    <p>Skoll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
-    <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p>
-    <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
 </section>
 
 <!-- Footer -->
@@ -186,25 +150,82 @@
 </div>
 
 <script>
+    let timeLabels = [];
+    let tempData = [], humidityData = [], soilData = [], lightData = [];
+
+    function createChart(ctx, label, data, color) {
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    borderColor: color,
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { title: { display: true, text: 'Time' }},
+                    y: { title: { display: true, text: label }, beginAtZero: true }
+                }
+            }
+        });
+    }
+
+    const tempChart = createChart(document.getElementById('temperatureChart').getContext('2d'), 'Temperature (°C)', tempData, 'red');
+    const humidityChart = createChart(document.getElementById('humidityChart').getContext('2d'), 'Humidity (%)', humidityData, 'blue');
+    const soilChart = createChart(document.getElementById('soilChart').getContext('2d'), 'Soil Moisture (%)', soilData, 'green');
+    const lightChart = createChart(document.getElementById('lightChart').getContext('2d'), 'Light Intensity', lightData, 'yellow');
+
     async function fetchLatestData() {
         try {
             const response = await fetch('/download');
             const text = await response.text();
-            const rows = text.trim().split("\n");
-            const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
+            const lines = text.trim().split('\n');
+            const latestData = lines[lines.length - 1].split(',');
 
-            document.getElementById("temperature").innerText = lastRow[2] + "°C"; // temp. in 2nd columm
-            document.getElementById("humidity").innerText = lastRow[3] + "%"; // humid. in 3rd column
-            document.getElementById("soil").innerText = lastRow[4] + "%"; // moist. in 4th column
-            document.getElementById("light").innerText = lastRow[5] + " Lumens"; // light in 5th column
+            const timestamp = latestData[0];
+            const temp = parseFloat(latestData[1]);
+            const humidity = parseFloat(latestData[2]);
+            const soil = parseFloat(latestData[3]);
+            const light = parseFloat(latestData[4]);
 
+            timeLabels.push(timestamp);
+            tempData.push(temp);
+            humidityData.push(humidity);
+            soilData.push(soil);
+            lightData.push(light);
+
+            if (timeLabels.length > 20) {
+                timeLabels.shift();
+                tempData.shift();
+                humidityData.shift();
+                soilData.shift();
+                lightData.shift();
+            }
+
+            document.getElementById('temperature').textContent = temp;
+            document.getElementById('humidity').textContent = humidity;
+            document.getElementById('soil').textContent = soil;
+            document.getElementById('light').textContent = light;
+
+            tempChart.update();
+            humidityChart.update();
+            soilChart.update();
+            lightChart.update();
         } catch (error) {
-            console.error("Error getting CSV data:", error);
+            console.error('Error fetching data:', error);
         }
     }
 
-    fetchLatestData();
-    setInterval(fetchLatestData, 5000);
+    setInterval(fetchLatestData, 60000);
 </script>
 
 </body>
