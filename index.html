@@ -90,7 +90,7 @@
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Stylish Download Button */
+        /* Download Button - has been styled */
         .download-button {
             display: inline-block;
             padding:
@@ -191,20 +191,20 @@
             const response = await fetch('/download');
             const text = await response.text();
             const rows = text.trim().split("\n");
-            const lastRow = rows[rows.length - 1].split(",");
+            const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
 
-            document.getElementById("temperature").innerText = lastRow[2] + "°C";
-            document.getElementById("humidity").innerText = lastRow[3] + "%";
-            document.getElementById("soil").innerText = lastRow[4] + "%";
-            document.getElementById("light").innerText = lastRow[5] + " Lumens";
+            document.getElementById("temperature").innerText = lastRow[2] + "°C"; // temp. in 2nd columm
+            document.getElementById("humidity").innerText = lastRow[3] + "%"; // humid. in 3rd column
+            document.getElementById("soil").innerText = lastRow[4] + "%"; // moist. in 4th column
+            document.getElementById("light").innerText = lastRow[5] + " Lumens"; // light in 5th column
 
         } catch (error) {
-            console.error("Error fetching CSV data:", error);
+            console.error("Error getting CSV data:", error);
         }
     }
 
     fetchLatestData();
-    setInterval(fetchLatestData, 60000);
+    setInterval(fetchLatestData, 5000);
 </script>
 
 </body>
