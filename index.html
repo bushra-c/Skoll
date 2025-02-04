@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skoll | Live Data</title>
+    <title>Sköll | Live Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -91,9 +90,55 @@
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .graph-container {
-            width: 100%;
-            margin-top: 30px;
+        /* Download Button - has been styled */
+        .download-button {
+            display: inline-block;
+            padding:
+
+```html
+            12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 20px;
+            display: block;
+            width: 250px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.5);
+            border: 2px solid rgba(0, 255, 100, 0.8);
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+            50% { box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.6); }
+            100% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+        }
+
+        .download-button {
+            animation: glow 2s infinite alternate;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 14px;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -124,61 +169,34 @@
         <div class="live-data-card">☀️ Light Intensity: <br> <span id="light">High</span></div>
     </div>
 
-    <div class="graph-container">
-        <div id="temperatureChart" style="width: 100%; height: 300px;"></div>
-        <div id="humidityChart" style="width: 100%; height: 300px;"></div>
-        <div id="soilChart" style="width: 100%; height: 300px;"></div>
-        <div id="lightChart" style="width: 100%; height: 300px;"></div>
-    </div>
-
+    <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a>
 </section>
 
 <!-- About Section -->
 <section id="about">
     <h1>About Skoll</h1>
-    <p>Skoll ensures your plants receive optimal conditions with smart sensors for temperature, humidity, soil moisture, and light.</p>
+    <p>Skoll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
+    <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p>
+    <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
 </section>
 
+<!-- Footer -->
+<div class="footer">
+    &copy; 2025 Skoll Technologies Ltd. All Rights Reserved.
+</div>
+
 <script>
-    // Initialize Highcharts graphs
-    function createChart(container, title, yAxisLabel) {
-        return Highcharts.chart(container, {
-            chart: { type: 'spline' },
-            title: { text: title },
-            xAxis: { type: 'datetime', title: { text: 'Time' } },
-            yAxis: { title: { text: yAxisLabel } },
-            series: [{ name: title, data: [] }]
-        });
-    }
-
-    let temperatureChart = createChart('temperatureChart', 'Air Temperature vs Time', 'Temperature (°C)');
-    let humidityChart = createChart('humidityChart', 'Humidity vs Time', 'Humidity (%)');
-    let soilChart = createChart('soilChart', 'Soil Moisture vs Time', 'Moisture (%)');
-    let lightChart = createChart('lightChart', 'Light Intensity vs Time', 'Lumens');
-
     async function fetchLatestData() {
         try {
             const response = await fetch('/download');
             const text = await response.text();
             const rows = text.trim().split("\n");
-            const lastRow = rows[rows.length - 1].split(",");
+            const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
 
-            let timeNow = (new Date()).getTime();
-            let temperature = parseFloat(lastRow[2]);
-            let humidity = parseFloat(lastRow[3]);
-            let soilMoisture = parseFloat(lastRow[4]);
-            let lightIntensity = parseFloat(lastRow[5]);
-
-            document.getElementById("temperature").innerText = temperature + "°C";
-            document.getElementById("humidity").innerText = humidity + "%";
-            document.getElementById("soil").innerText = soilMoisture + "%";
-            document.getElementById("light").innerText = lightIntensity + " Lumens";
-
-            // Update graphs
-            temperatureChart.series[0].addPoint([timeNow, temperature], true, temperatureChart.series[0].data.length > 20);
-            humidityChart.series[0].addPoint([timeNow, humidity], true, humidityChart.series[0].data.length > 20);
-            soilChart.series[0].addPoint([timeNow, soilMoisture], true, soilChart.series[0].data.length > 20);
-            lightChart.series[0].addPoint([timeNow, lightIntensity], true, lightChart.series[0].data.length > 20);
+            document.getElementById("temperature").innerText = lastRow[2] + "°C"; // temp. in 2nd columm
+            document.getElementById("humidity").innerText = lastRow[3] + "%"; // humid. in 3rd column
+            document.getElementById("soil").innerText = lastRow[4] + "%"; // moist. in 4th column
+            document.getElementById("light").innerText = lastRow[5] + " Lumens"; // light in 5th column
 
         } catch (error) {
             console.error("Error getting CSV data:", error);
@@ -191,3 +209,4 @@
 
 </body>
 </html>
+
