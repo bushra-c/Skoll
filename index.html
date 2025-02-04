@@ -14,6 +14,30 @@
 
 <style> 
 
+<script> 
+    async function fetchLatestData() { 
+        try { 
+            const response = await fetch('/download'); 
+            const text = await response.text(); 
+            const rows = text.trim().split("\n"); // This splits csv into rows
+            const lastRow = rows[rows.length - 1].split(","); // Get last row and split into values (index includes 0 so minus 1)
+ 
+            // match indies to the ones in the csv file
+            document.getElementById("temperature").innerText = lastRow[2] + "°C";  // Air Temperature column 2
+            document.getElementById("humidity").innerText = lastRow[3] + "%";  // Air Humidity column 3
+            document.getElementById("soil").innerText = lastRow[4] + "%";  // Soil Moisture column 4
+            document.getElementById("light").innerText = lastRow[5] + " Lumens";  // Luminosity column 5
+ 
+        } catch (error) { 
+            console.error("Error fetching CSV data:", error); 
+        } 
+    } 
+ 
+    // Fetch data immediately, then update every 60 seconds 
+    fetchLatestData(); 
+    setInterval(fetchLatestData, 60000); 
+</script> 
+
 body { 
 
     font-family: 'Poppins', sans-serif; 
@@ -340,7 +364,7 @@ html {
 
 <script> 
 
-// Optional: Add any JavaScript functionality as needed for dynamic features. 
+// potential additons: could add javascript features for more functions
 
 </script> 
 
