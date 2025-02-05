@@ -184,5 +184,19 @@
 </div>
 
 
+
+
+
+
+
+
+server.on("/setvalue", []() {
+    if (server.hasArg("value")) {
+        String inputValue = server.arg("value");  // Get value from user input
+        Serial.println("User entered: " + PlantInput);
+    server.send(200, "text/html", "Value received! Go back <a href='/'>Home</a>");
+});
+    
+
 </body>
 </html>
