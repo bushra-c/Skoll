@@ -183,31 +183,6 @@
     &copy; 2025 Sköll Technologies Ltd. All Rights Reserved.
 </div>
 
-<script>
-    function savePlant() {
-        let plantType = document.getElementById("plantInput").value.trim();
-        if (plantType !== "") {
-            localStorage.setItem("userPlant", plantType);
-            document.getElementById("plantDisplay").innerText = "Your plant: " + plantType;
-
-            fetch("http://<ESP32_IP>/save-plant", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ plant: plantType })
-            })
-            .then(response => response.text())
-            .then(data => console.log("ESP32 Response:", data))
-            .catch(error => console.error("Error sending data:", error));
-        }
-    }
-
-    window.onload = function() {
-        let savedPlant = localStorage.getItem("userPlant");
-        if (savedPlant) {
-            document.getElementById("plantDisplay").innerText = "Your plant: " + savedPlant;
-        }
-    };
-</script>
 
 </body>
 </html>
