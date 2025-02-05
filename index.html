@@ -90,46 +90,42 @@
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Download Button - has been styled */
-        .download-button {
-            display: inline-block;
-            padding:
-
-```html
-            12px 25px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        /* Styled input box and button */
+        .plant-input-container {
             margin-top: 20px;
-            display: block;
+        }
+
+        .plant-input-container input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            outline: none;
             width: 250px;
             text-align: center;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .download-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
-            box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.5);
-            border: 2px solid rgba(0, 255, 100, 0.8);
+        .plant-input-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        @keyframes glow {
-            0% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
-            50% { box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.6); }
-            100% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+        .plant-input-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            background: #00cc44;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
         }
 
-        .download-button {
-            animation: glow 2s infinite alternate;
+        .plant-input-container button:hover {
+            background: #009933;
         }
 
         .footer {
@@ -155,6 +151,14 @@
 <section id="home">
     <h1>Welcome to Skoll</h1>
     <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p>
+
+    <!-- Plant Input Box -->
+    <div class="plant-input-container">
+        <label for="plantInput">What kind of plant do you have?</label><br>
+        <input type="text" id="plantInput" placeholder="Enter plant name">
+        <button onclick="savePlant()">Save</button>
+        <p id="plantDisplay" style="margin-top: 10px; font-weight: bold;"></p>
+    </div>
 </section>
 
 <!-- Data Section -->
@@ -191,22 +195,32 @@
             const response = await fetch('/download');
             const text = await response.text();
             const rows = text.trim().split("\n");
-            const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
+            const lastRow = rows[rows.length - 1].split(",");
 
-            document.getElementById("temperature").innerText = lastRow[2] + "°C"; // temp. in 2nd columm
-            document.getElementById("humidity").innerText = lastRow[3] + "%"; // humid. in 3rd column
-            document.getElementById("soil").innerText = lastRow[4] + "%"; // moist. in 4th column
-            document.getElementById("light").innerText = lastRow[5] + " Lumens"; // light in 5th column
-
+            document.getElementById("temperature").innerText = lastRow[2] + "°C";
+            document.getElementById("humidity").innerText = lastRow[3] + "%";
+            document.getElementById("soil").innerText = lastRow[4] + "%";
+            document.getElementById("light").innerText = lastRow[5] + " Lumens";
         } catch (error) {
-            console.error("Error getting CSV data:", error);
+            console.error("Error fetching data:", error);
         }
     }
 
-    fetchLatestData();
-    setInterval(fetchLatestData, 5000);
+    function savePlant() {
+        let plantType = document.getElementById("plantInput").value;
+        if (plantType.trim() !== "") {
+            localStorage.setItem("userPlant", plantType);
+            document.getElementById("plantDisplay").innerText = "Your plant: " + plantType;
+        }
+    }
+
+    window.onload = function() {
+        let savedPlant = localStorage.getItem("userPlant");
+        if (savedPlant) {
+            document.getElementById("plantDisplay").innerText = "Your plant: " + savedPlant;
+        }
+    };
 </script>
 
 </body>
 </html>
-
