@@ -107,9 +107,54 @@
    </div>
 </section>
 
+<!-- Data Section -->
+<section id="data">
+   <h1>Live Sensor Data</h1>
+   <p>Monitor real-time environmental data from your Skoll plant pot.</p>
+
+   <div class="live-data-container">
+       <div class="live-data-card">🌡️ Air Temperature: <br> <span id="temperature">24°C</span></div>
+       <div class="live-data-card">💧 Humidity: <br> <span id="humidity">60%</span></div>
+       <div class="live-data-card">🌱 Soil Moisture: <br> <span id="soil">45%</span></div>
+       <div class="live-data-card">☀️ Light Intensity: <br> <span id="light">High</span></div>
+   </div>
+
+   <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a>
+</section>
+
+<!-- About Section -->
+<section id="about">
+   <h1>About Skoll</h1>
+   <p>Skoll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
+   <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p>
+   <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
+</section>
+
 <!-- Footer -->
 <div class="footer">
    &copy; 2025 Skoll Technologies Ltd. All Rights Reserved.
 </div>
+
+<script>
+   async function fetchLatestData() {
+       try {
+           const response = await fetch('/download');
+           const text = await response.text();
+           const rows = text.trim().split("\n");
+           const lastRow = rows[rows.length - 1].split(",");
+
+           document.getElementById("temperature").innerText = lastRow[1] + "°C";
+           document.getElementById("humidity").innerText = lastRow[2] + "%";
+           document.getElementById("soil").innerText = lastRow[3] + "%";
+           document.getElementById("light").innerText = lastRow[4] + " Lumens";
+       } catch (error) {
+           console.error("Error getting CSV data:", error);
+       }
+   }
+
+   fetchLatestData();
+   setInterval(fetchLatestData, 5000);
+</script>
+
 </body>
 </html>
