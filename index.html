@@ -97,11 +97,13 @@
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
         font-size: 18px;
         font-weight: bold;
-        width: 220px;
+        width: calc(50% - 20px); /* 50% width for two per row, minus gap */
+        max-width: 220px; /* Optional: limits the width of each card */
         transition: transform 0.3s ease-in-out;
         text-align: center;
     }
 
+    /* Live data card floating effect on hover */
     .live-data-card:hover {
         transform: translateY(-10px);  /* Floating effect on hover */
         box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.4);
