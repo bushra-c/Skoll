@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Skoll | Live Data</title>
+   <title>Sköll | Live Data</title>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 
@@ -167,8 +167,12 @@
 
 <!-- Home Section -->
 <section id="home">
-   <h1>Welcome to Skoll</h1>
+   <h1>Welcome to Sköll</h1>
    <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p>
+      <div class="input-container">
+       <label for="plantType">Enter Your Plant Type:</label>
+       <input type="text" id="plantType" class="plant-input" placeholder="e.g., Mint">
+   </div>
 </section>
 
 
@@ -192,20 +196,16 @@
 
 <!-- About Section -->
 <section id="about">
-   <h1>About Skoll</h1>
-   <p>Skoll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
+   <h1>About Sköll</h1>
+   <p>Sköll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
    <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p>
    <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
-   <div class="input-container">
-       <label for="plantType">Enter Your Plant Type:</label>
-       <input type="text" id="plantType" class="plant-input" placeholder="e.g., Aloe Vera">
-   </div>
 </section>
 
 
 <!-- Footer -->
 <div class="footer">
-   &copy; 2025 Skoll Technologies Ltd. All Rights Reserved.
+   &copy; 2025 Sköll Technologies Ltd. All Rights Reserved.
 </div>
 
 
@@ -221,7 +221,7 @@
            document.getElementById("temperature").innerText = lastRow[1] + "°C"; // temp. in 2nd columm
            document.getElementById("humidity").innerText = lastRow[2] + "%"; // humid. in 3rd column
            document.getElementById("soil").innerText = lastRow[3] + "%"; // moist. in 4th column
-           document.getElementById("light").innerText = lastRow[4] + " Lumens"; // light in 5th column
+           document.getElementById("light").innerText = lastRow[4] + " % "; // light in 5th column
 
 
        } catch (error) {
