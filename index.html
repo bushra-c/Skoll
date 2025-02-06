@@ -159,6 +159,35 @@
         color: white;
         background: rgba(0, 0, 0, 0.8);
     }
+
+    /* Input box styling */
+    input[type="text"] {
+        padding: 15px 20px;
+        font-size: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 250px;
+        margin-top: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        outline: none;
+        box-shadow: 0px 4px 10px rgba(0, 255, 100, 0.3); /* Soft glowing effect */
+    }
+
+    /* Focus effect */
+    input[type="text"]:focus {
+        border-color: rgba(0, 255, 100, 0.8);
+        box-shadow: 0px 0px 15px rgba(0, 255, 100, 0.6); /* Bright glowing effect when focused */
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Placeholder text */
+    input[type="text"]::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+    }
 </style>
 
 </head>
