@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Skoll | Live Data</title>
    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
 
    <style>
        body {
@@ -19,11 +21,13 @@
            animation: gradientShift 10s ease infinite;
        }
 
+
        @keyframes gradientShift {
            0% { background-position: 0% 50%; }
            50% { background-position: 100% 50%; }
            100% { background-position: 0% 50%; }
        }
+
 
        .navbar {
            background: rgba(0, 0, 0, 0.8);
@@ -48,6 +52,7 @@
            border-radius: 5px;
        }
 
+
        section {
            width: 80%;
            margin: auto;
@@ -66,17 +71,78 @@
            color: #b3ff99;
        }
 
-       .input-container {
-           margin-top: 20px;
+
+       .live-data-container {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 20px;
+           margin-top: 30px;
        }
-       .plant-input {
-           padding: 10px;
-           font-size: 16px;
-           border-radius: 10px;
-           border: none;
+       .live-data-card {
+           background: rgba(255, 255, 255, 0.15);
+           backdrop-filter: blur(10px);
+           padding: 20px;
+           border-radius: 15px;
+           box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+           font-size: 18px;
+           font-weight: bold;
+           width: 220px;
+           transition: transform 0.3s ease-in-out;
            text-align: center;
-           width: 250px;
        }
+       .live-data-card:hover {
+           transform: scale(1.05);
+           box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+       }
+
+
+       /* Download Button - has been styled */
+       .download-button {
+           display: inline-block;
+           padding:
+
+
+```html
+           12px 25px;
+           font-size: 18px;
+           font-weight: bold;
+           color: white;
+           text-decoration: none;
+           border-radius: 25px;
+           background: rgba(255, 255, 255, 0.15);
+           backdrop-filter: blur(10px);
+           box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+           transition: all 0.3s ease-in-out;
+           border: 2px solid rgba(255, 255, 255, 0.3);
+           margin-top: 20px;
+           display: block;
+           width: 250px;
+           text-align: center;
+           margin-left: auto;
+           margin-right: auto;
+       }
+
+
+       .download-button:hover {
+           background: rgba(255, 255, 255, 0.25);
+           transform: scale(1.05);
+           box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.5);
+           border: 2px solid rgba(0, 255, 100, 0.8);
+       }
+
+
+       @keyframes glow {
+           0% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+           50% { box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.6); }
+           100% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+       }
+
+
+       .download-button {
+           animation: glow 2s infinite alternate;
+       }
+
 
        .footer {
            text-align: center;
@@ -90,6 +156,7 @@
 </head>
 <body>
 
+
 <!-- Navigation Menu -->
 <div class="navbar">
    <a href="#home">Home</a>
@@ -97,20 +164,19 @@
    <a href="#about">About</a>
 </div>
 
+
 <!-- Home Section -->
 <section id="home">
    <h1>Welcome to Skoll</h1>
    <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p>
-   <div class="input-container">
-       <label for="plantType">Enter Your Plant Type:</label>
-       <input type="text" id="plantType" class="plant-input" placeholder="e.g., Aloe Vera">
-   </div>
 </section>
+
 
 <!-- Data Section -->
 <section id="data">
    <h1>Live Sensor Data</h1>
    <p>Monitor real-time environmental data from your Skoll plant pot.</p>
+
 
    <div class="live-data-container">
        <div class="live-data-card">🌡️ Air Temperature: <br> <span id="temperature">24°C</span></div>
@@ -119,8 +185,10 @@
        <div class="live-data-card">☀️ Light Intensity: <br> <span id="light">High</span></div>
    </div>
 
+
    <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a>
 </section>
+
 
 <!-- About Section -->
 <section id="about">
@@ -130,10 +198,12 @@
    <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
 </section>
 
+
 <!-- Footer -->
 <div class="footer">
    &copy; 2025 Skoll Technologies Ltd. All Rights Reserved.
 </div>
+
 
 <script>
    async function fetchLatestData() {
@@ -141,20 +211,25 @@
            const response = await fetch('/download');
            const text = await response.text();
            const rows = text.trim().split("\n");
-           const lastRow = rows[rows.length - 1].split(",");
+           const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
 
-           document.getElementById("temperature").innerText = lastRow[1] + "°C";
-           document.getElementById("humidity").innerText = lastRow[2] + "%";
-           document.getElementById("soil").innerText = lastRow[3] + "%";
-           document.getElementById("light").innerText = lastRow[4] + " Lumens";
+
+           document.getElementById("temperature").innerText = lastRow[1] + "°C"; // temp. in 2nd columm
+           document.getElementById("humidity").innerText = lastRow[2] + "%"; // humid. in 3rd column
+           document.getElementById("soil").innerText = lastRow[3] + "%"; // moist. in 4th column
+           document.getElementById("light").innerText = lastRow[4] + " Lumens"; // light in 5th column
+
+
        } catch (error) {
            console.error("Error getting CSV data:", error);
        }
    }
 
+
    fetchLatestData();
    setInterval(fetchLatestData, 5000);
 </script>
 
+
 </body>
-</html>
+</html> 
