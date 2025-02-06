@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sköll | Live Data</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For charting -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sköll | Live Data</title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For charting -->
 
 <style>
     /* Body with animated gradient background */
@@ -110,13 +110,92 @@
         box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.4);
     }
 
+    /* Download button with glowing effect */
+    .download-button {
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-top: 20px;
+        display: block;
+        width: 250px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Hover effect for download button */
+    .download-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.05);
+        box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.5);
+        border: 2px solid rgba(0, 255, 100, 0.8);
+    }
+
+    /* Glowing effect for download button */
+    @keyframes glow {
+        0% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+        50% { box-shadow: 0px 8px 20px rgba(0, 255, 100, 0.6); }
+        100% { box-shadow: 0px 6px 15px rgba(0, 255, 100, 0.3); }
+    }
+
+    .download-button {
+        animation: glow 2s infinite alternate;
+    }
+
+    /* Footer styling */
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        font-size: 14px;
+        color: white;
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Input box styling */
+    input[type="text"] {
+        padding: 15px 20px;
+        font-size: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 250px;
+        margin-top: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        outline: none;
+        box-shadow: 0px 4px 10px rgba(0, 255, 100, 0.3); /* Soft glowing effect */
+    }
+
+    /* Focus effect */
+    input[type="text"]:focus {
+        border-color: rgba(0, 255, 100, 0.8);
+        box-shadow: 0px 0px 15px rgba(0, 255, 100, 0.6); /* Bright glowing effect when focused */
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Placeholder text */
+    input[type="text"]::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+    }
+
     /* Individual chart container styling */
     .chart-container {
         width: 100%;
-        height: 200px; /* Increased height for better visibility */
-        margin-top: 15px;       
+        height: 100px;
+        margin-top: 15px;
     }
-    
 </style>
 
 </head>
@@ -128,6 +207,16 @@
        <a href="#about">About</a>
        <a href="#faq">FAQ</a>
     </div>
+
+    <!-- Home Section -->
+    <section id="home">
+       <h1>Welcome to Sköll</h1>
+       <p>Taking care of your plant has never been easier. Monitor real-time environmental data with our smart plant pot.</p>
+       <div class="input-container">
+        <label for="plantType">Enter Your Plant Type:</label>
+        <input type="text" id="plantType" class="plant-input" placeholder="e.g., Cactus">
+       </div>
+    </section>
 
     <!-- Data Section -->
     <section id="data">
@@ -159,80 +248,101 @@
                </div>
            </div>
        </div>
+
+       <a href="/download" class="download-button" download="sensor_data.csv">Download CSV File</a>
+
     </section>
 
+    <!-- About Section -->
+    <section id="about">
+       <h1>About Sköll</h1>
+       <p>Sköll is designed to change the way you care for plants, ensuring that they always receive the right amount of light and optimal conditions.</p>
+       <p>With sensors monitoring temperature, humidity, soil moisture, and light, our plant pot intelligently adjusts its position to find the best light source.</p>
+       <p>Inspired by Sköll, the Norse wolf that chases the sun, our plant pot ensures your plants get the care they need, even when you're not around.</p>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h1>Frequently Asked Questions</h1>
+        <p><strong>Q:</strong> How do I know if my plant needs more sunlight?</p>
+        <p><strong>A:</strong> The Sköll plant pot moves toward optimal sunlight based on sensor data, and you can monitor the light levels in the "Live Data" section.</p>
+        <p><strong>Q:</strong> What should I do if my soil moisture is too low?</p>
+        <p><strong>A:</strong> You will be alerted to water your plant if the moisture levels fall below a predefined threshold.</p>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+       &copy; 2025 Sköll Technologies Ltd. All Rights Reserved.
+    </div>
+
     <script>
-    let temperatureData = [];
-    let humidityData = [];
-    let soilData = [];
-    let lightData = [];
-    let timeData = [];
+       let temperatureData = [];
+       let humidityData = [];
+       let soilData = [];
+       let lightData = [];
+       let timeData = [];
 
-    async function fetchLatestData() {
-        try {
-            const response = await fetch('/download'); // Replace with actual path to CSV
-            const text = await response.text();
-            const rows = text.trim().split("\n");
-            const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
+       async function fetchLatestData() {
+           try {
+               const response = await fetch('/download');
+               const text = await response.text();
+               const rows = text.trim().split("\n");
+               const lastRow = rows[rows.length - 1].split(","); // n-1 as index starts at 0
 
-            // Update the display with the latest data from CSV
-            document.getElementById("temperature").innerText = lastRow[1] + "°C"; // Temperature in 2nd column
-            document.getElementById("humidity").innerText = lastRow[2] + "%"; // Humidity in 3rd column
-            document.getElementById("soil").innerText = lastRow[3] + "%"; // Soil moisture in 4th column
-            document.getElementById("light").innerText = lastRow[4] + "%"; // Light intensity in 5th column
+               document.getElementById("temperature").innerText = lastRow[1] + "°C"; // temp. in 2nd column
+               document.getElementById("humidity").innerText = lastRow[2] + "%"; // humidity in 3rd column
+               document.getElementById("soil").innerText = lastRow[3] + "%"; // moisture in 4th column
+               document.getElementById("light").innerText = lastRow[4] + " % "; // light in 5th column
 
-            // Push new data for graphs
-            temperatureData.push(lastRow[1]);
-            humidityData.push(lastRow[2]);
-            soilData.push(lastRow[3]);
-            lightData.push(lastRow[4]);
-            timeData.push(new Date().toLocaleTimeString()); // Time as X-axis label
+               // Push new data for graphs
+               temperatureData.push(lastRow[1]);
+               humidityData.push(lastRow[2]);
+               soilData.push(lastRow[3]);
+               lightData.push(lastRow[4]);
+               timeData.push(new Date().toLocaleTimeString()); // Time as X-axis label
 
-            // Update charts
-            updateChart('temperatureChart', temperatureData, 1, 60);
-            updateChart('humidityChart', humidityData, 0, 100);
-            updateChart('soilChart', soilData, 0, 100);
-            updateChart('lightChart', lightData, 0, 100);
-        } catch (error) {
-            console.error("Error getting CSV data:", error);
-        }
-    }
+               // Update charts
+               updateChart('temperatureChart', temperatureData, 1, 60);
+               updateChart('humidityChart', humidityData, 0, 100);
+               updateChart('soilChart', soilData, 0, 100);
+               updateChart('lightChart', lightData, 0, 100);
+           } catch (error) {
+               console.error("Error getting CSV data:", error);
+           }
+       }
 
-    function updateChart(chartId, data, minY, maxY) {
-        const ctx = document.getElementById(chartId).getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: timeData,
-                datasets: [{
-                    label: chartId.split('Chart')[0], // Label based on chart id
-                    data: data,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        min: minY,
-                        max: maxY
-                    },
-                    x: {
-                        ticks: {
-                            maxRotation: 0
-                        }
-                    }
-                }
-            }
-        });
-    }
+       function updateChart(chartId, data, minY, maxY) {
+           const ctx = document.getElementById(chartId).getContext('2d');
+           new Chart(ctx, {
+               type: 'line',
+               data: {
+                   labels: timeData,
+                   datasets: [{
+                       label: chartId.split('Chart')[0], // Label based on chart id
+                       data: data,
+                       borderColor: 'rgba(75, 192, 192, 1)',
+                       backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                       borderWidth: 2
+                   }]
+               },
+               options: {
+                   responsive: true,
+                   scales: {
+                       y: {
+                           min: minY,
+                           max: maxY
+                       },
+                       x: {
+                           ticks: {
+                               maxRotation: 0
+                           }
+                       }
+                   }
+               }
+           });
+       }
 
-    // Fetch data every 5 seconds
-    setInterval(fetchLatestData, 5000);
-</script>
-
+       setInterval(fetchLatestData, 5000); // Fetch every 5 seconds
+    </script>
 </body>
 </html>
-
